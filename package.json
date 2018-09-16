@@ -1,0 +1,25 @@
+{
+  "name": "Recommendations",
+  "version": "1.0.0",
+  "description": "A Vue application for managing recommendations among your friends.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevorfehrman/Recommendations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trevorfehrman/Recommendations/issues"
+  },
+  "homepage": "https://github.com/trevorfehrman/Recommendations#readme",
+  "dependencies": {
+    "3": "^2.1.0",
+    "knex": "^0.15.2",
+    "sqlite": "^3.0.0"
+  }
+}
