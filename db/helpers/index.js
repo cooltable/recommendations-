@@ -4,4 +4,8 @@ module.exports = {
 	getUsers() {
 		return db("users").select("username");
 	},
+
+	addUser(user) {
+		return db("users").insert(user);
+	},
 };

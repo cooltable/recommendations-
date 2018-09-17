@@ -16,9 +16,37 @@ server.get("/api/users", function(req, res) {
 	helpers
 		.getUsers()
 		.then(users => {
-			return res.json(users);
+			return res.json({
+				error: false,
+				message: users,
+			});
 		})
 		.catch(err => res.status(500).send(err));
+});
+
+server.post("/api/users", function(req, res) {
+	const { username, password } = req.body;
+	if (!username || !password) {
+		return res.json({
+			error: true,
+			message: "Please provide a username and/or password",
+		});
+	} else {
+		helpers
+			.addUser({ username, password })
+			.then(user => {
+				return res.json({
+					error: false,
+					message: user,
+				});
+			})
+			.catch(err =>
+				res.json({
+					error: true,
+					message: err,
+				}),
+			);
+	}
 });
 
 const port = 8000;
