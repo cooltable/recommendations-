@@ -86,6 +86,31 @@ server.put("/api/users/:id", function(req, res) {
 	}
 });
 
+server.post("/api/content", function(req, res) {
+	const { title, description, type, rating, from_id } = req.body;
+	if (!title || !description || !type || !rating || !from_id) {
+		return res.json({
+			error: true,
+			message: "Please provide information for all fields",
+		});
+	} else {
+		helpers
+			.addContent(req.body)
+			.then(content => {
+				return res.json({
+					error: false,
+					message: content,
+				});
+			})
+			.catch(err =>
+				res.json({
+					error: true,
+					message: err,
+				}),
+			);
+	}
+});
+
 const port = 8000;
 server.listen(port, function() {
 	console.log(`\n === Web API Listening on http://localhost:${port}===`);

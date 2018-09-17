@@ -24,4 +24,8 @@ module.exports = {
 				password: password,
 			});
 	},
+
+	addContent(content) {
+		return db("content").insert(content);
+	},
 };
