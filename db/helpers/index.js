@@ -25,6 +25,14 @@ module.exports = {
 			});
 	},
 
+	// getContent(id, recipients) {
+	//     const content_querry = db("content");
+
+	//     const recipient_querry = db()
+
+	//     const
+	// },
+
 	addContent(content) {
 		return db("content").insert(content);
 	},
