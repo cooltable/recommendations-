@@ -8,4 +8,11 @@ module.exports = {
 	addUser(user) {
 		return db("users").insert(user);
 	},
+
+	getUser(id) {
+		return db("users")
+			.select("username")
+			.where("id", id)
+			.first();
+	},
 };

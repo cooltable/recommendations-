@@ -24,6 +24,18 @@ server.get("/api/users", function(req, res) {
 		.catch(err => res.status(500).send(err));
 });
 
+server.get("/api/users/:id", function(req, res) {
+	helpers
+		.getUser(req.params.id)
+		.then(user => {
+			return res.json({
+				error: false,
+				message: user,
+			});
+		})
+		.catch(err => res.status(500).send(err));
+});
+
 server.post("/api/users", function(req, res) {
 	const { username, password } = req.body;
 	if (!username || !password) {
