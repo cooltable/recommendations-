@@ -61,6 +61,31 @@ server.post("/api/users", function(req, res) {
 	}
 });
 
+server.put("/api/users/:id", function(req, res) {
+	const { password } = req.body;
+	if (!password) {
+		return res.json({
+			error: true,
+			message: "Please provide your new password",
+		});
+	} else {
+		helpers
+			.updatePassword(req.params.id, password)
+			.then(update => {
+				return res.json({
+					error: false,
+					message: update,
+				});
+			})
+			.catch(err =>
+				res.json({
+					error: true,
+					message: err,
+				}),
+			);
+	}
+});
+
 const port = 8000;
 server.listen(port, function() {
 	console.log(`\n === Web API Listening on http://localhost:${port}===`);

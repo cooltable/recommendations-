@@ -15,4 +15,13 @@ module.exports = {
 			.where("id", id)
 			.first();
 	},
+
+	updatePassword(id, password) {
+		return db("users")
+			.where("id", id)
+			.update({
+				username: undefined,
+				password: password,
+			});
+	},
 };
