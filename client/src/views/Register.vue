@@ -9,8 +9,9 @@ export default {
   },
   methods: {
     register: function(username, password, first_name, last_name, email) {
+      console.log(username, password, first_name, last_name, email);
       axios
-        .post('http://localhost:8000/auth/login', {
+        .post('http://localhost:8000/auth/register', {
           username,
           password,
           first_name,
