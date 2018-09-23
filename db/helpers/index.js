@@ -63,24 +63,28 @@ module.exports = {
 		});
 	},
 
+	//First 5 keys in argument are inserted into the content table, 6th key is
+	//an array of user ids, all of which are added to the users_content table.
 	addContent(content) {
 		let { title, description, type, rating, from_id, to_idARR } = content;
 
 		return db("content")
 			.insert({ title, description, type, rating, from_id })
-			.then(ids => {
-				let id = ids[0];
-				return Promise.all(
-					to_idARR.map(to_id => {
-						return Promise.resolve(
-							db("users_content").insert({
-								to_id: to_id,
-								content_id: id,
-							}),
-						);
-					}),
-				);
-			});
+			.then(id => {
+				let contentId = id[0];
+
+				let recipients = to_idARR.map(to => ({
+					to_id: to,
+					content_id: contentId,
+				}));
+
+				return db("users_content")
+					.insert(recipients)
+					.then(ids => {
+						return contentId;
+					});
+			})
+			.catch(err => console.log(err));
 	},
 
 	addRecipients(toArr, content_id) {

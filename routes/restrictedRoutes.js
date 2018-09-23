@@ -1,43 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-
 const helpers = require("../db/helpers/index");
 
-const secret = "secret";
-
-//Middleware function to check for token
-function protected(req, res, next) {
-	const token = req.headers.authorization;
-
-	if (token) {
-		jwt.verify(token, secret, (err, decodedToken) => {
-			if (err) {
-				return res.json({
-					error: true,
-					message: "You are not authorized",
-				});
-			} else {
-				req.user = { username: decodedToken.username };
-				next();
-			}
-		});
-	} else {
-		return res
-			.json({
-				error: true,
-				message: "No token provided",
-			})
-			.catch(err => res.status(500).send(err));
-	}
-}
+//Checking Server
 
 //Gets a list of user names
-router.get("/", protected, function(req, res) {
-	res.send("ya made it mon");
-});
-
-router.get("/users", protected, function(req, res) {
+router.get("/", function(req, res) {
 	helpers
 		.getUsers()
 		.then(users => {
@@ -50,7 +18,7 @@ router.get("/users", protected, function(req, res) {
 });
 
 //Gets a single username
-router.get("/users/:id", protected, function(req, res) {
+router.get("/:id", function(req, res) {
 	helpers
 		.getUser(req.params.id)
 		.then(user => {
@@ -63,7 +31,7 @@ router.get("/users/:id", protected, function(req, res) {
 });
 
 //Changes password for the provided username
-router.put("/users/:id", protected, function(req, res) {
+router.put("/:id", function(req, res) {
 	const { password } = req.body;
 	if (!password) {
 		return res.json({

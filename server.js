@@ -3,8 +3,10 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const server = express();
+const { protected } = require("./middleware");
 const authRoutes = require("./routes/authRoutes");
 const restrictedRoutes = require("./routes/restrictedRoutes");
+const contentRoutes = require("./routes/contentRoutes");
 
 server.use(cors());
 server.use(express.json());
@@ -12,34 +14,10 @@ server.use(helmet());
 server.use(morgan("dev"));
 
 server.use("/auth", authRoutes);
-server.use("/restricted", restrictedRoutes);
+server.use("/users", protected, restrictedRoutes);
+server.use("/content", protected, contentRoutes);
 
-server.post("/api/content", function(req, res) {
-	const { title, description, type, rating, from_id, to_idARR } = req.body;
-	if (!title || !description || !type || !rating || !from_id || !to_idARR) {
-		return res.json({
-			error: true,
-			message: "Please provide information for all fields",
-		});
-	} else {
-		helpers
-			.addContent(req.body)
-			.then(content => {
-				return res.json({
-					error: false,
-					message: content,
-				});
-			})
-			.catch(err =>
-				res.json({
-					error: true,
-					message: err,
-				}),
-			);
-	}
-});
-
-server.post("/api/content/:id/to", (req, res) => {
+server.post("/api/content/:id", (req, res) => {
 	const { to_id } = req.body;
 	helpers
 		.addRecipients(to_id, req.params.id)
@@ -47,7 +25,7 @@ server.post("/api/content/:id/to", (req, res) => {
 		.catch(err => console.log(err));
 });
 
-server.delete("/api/content/:id/to", (req, res) => {
+server.delete("/api/content/:id", (req, res) => {
 	const { to_id } = req.body;
 	helpers
 		.removeRecipients(to_id, req.params.id)

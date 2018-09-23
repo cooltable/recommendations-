@@ -13,6 +13,7 @@ function generateToken(payload) {
 	});
 }
 
+//Registers a new user
 router.post("/register", function(req, res) {
 	let { username, first_name, last_name, password, email } = req.body;
 	if (!username || !first_name || !last_name || !password || !email) {
@@ -42,6 +43,7 @@ router.post("/register", function(req, res) {
 		);
 });
 
+//Logs in an existing user
 router.post("/login", function(req, res) {
 	let { username, password } = req.body;
 
