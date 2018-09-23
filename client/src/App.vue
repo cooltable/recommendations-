@@ -30,7 +30,7 @@ html {
 
 body {
 	font-size: 1.6rem;
-	font-family: "Work Sans", sans-serif;
+	font-family: "Open Sans", sans-serif;
 	line-height: 1.5;
 }
 
@@ -39,7 +39,7 @@ h2,
 h3,
 h4,
 h5 {
-	font-family: "Nunito", sans-serif;
+	font-family: "Comfortaa", sans-serif;
 	line-height: 1.5;
 }
 </style>
