@@ -13,7 +13,8 @@ export default {
         .post('http://localhost:8000/auth/login', { username, password })
         .then(response => {
           console.log(response);
-          this.$router.push('/profile');
+          localStorage.setItem('token', response.data.token);
+          this.$store.dispatch('logIn', response.data.user);
         })
         .catch(error => {
           console.log(error);

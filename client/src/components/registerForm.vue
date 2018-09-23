@@ -79,3 +79,7 @@ export default {
   </div>
 </template>
 
+<style scoped lang="scss">
+@import '../variables';
+</style>
+

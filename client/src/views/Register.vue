@@ -19,7 +19,8 @@ export default {
         })
         .then(response => {
           console.log(response);
-          this.$router.push('/profile');
+          localStorage.setItem('token', response.data.token);
+          this.$store.dispatch('logIn', response.data.user);
         })
         .catch(error => {
           console.log(error);
