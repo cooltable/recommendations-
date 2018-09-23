@@ -63,7 +63,7 @@ router.get("/users/:id", protected, function(req, res) {
 });
 
 //Changes password for the provided username
-router.put("/users/:id", function(req, res) {
+router.put("/users/:id", protected, function(req, res) {
 	const { password } = req.body;
 	if (!password) {
 		return res.json({

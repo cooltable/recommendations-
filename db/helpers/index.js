@@ -1,5 +1,5 @@
 const db = require("knex")(require("../../knexfile").development);
-const bcrypt = require("bcrypjs");
+const bcrypt = require("bcryptjs");
 
 const SALT_ROUNDS = 8;
 
