@@ -1,3 +1,15 @@
+<script>
+export default {
+  name: 'login-form-comp',
+  data: function() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+};
+</script>
+
 <template>
   <div>
     <form v-on:submit.prevent="$emit('submission', username, password)" class="form">
@@ -14,14 +26,3 @@
   </div>
 </template>
 
-<script>
-export default {
-	name: "form-comp",
-	data: function() {
-		return {
-			username: "",
-			password: "",
-		};
-	},
-};
-</script>
