@@ -1,23 +1,29 @@
 <script>
-import LoginFormComp from '@/components/loginForm.vue';
-import axios from 'axios';
+import FormComp from '@/components/Form.vue';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'login',
   components: {
-    LoginFormComp,
+    FormComp,
+  },
+  data: function() {
+    return {
+      errors: [],
+      username: '',
+      password: '',
+    };
   },
   methods: {
-    login: function(username, password) {
-      axios
-        .post('http://localhost:8000/auth/login', { username, password })
-        .then(response => {
-          console.log(response);
-          localStorage.setItem('token', response.data.token);
-          this.$store.dispatch('logIn', response.data.user);
-        })
-        .catch(error => {
-          console.log(error);
+    logInUser() {
+      this.errors = [];
+      if (!this.username || !this.password) {
+        this.errors.push('Please complete the required fields.');
+      }
+      if (this.username && this.password)
+        this.$store.dispatch('logIn', {
+          username: this.username,
+          password: this.password,
         });
     },
   },
@@ -27,6 +33,11 @@ export default {
 <template>
   <div class="login">
     <h1>Login</h1>
-    <login-form-comp v-on:submission="login"/>
+    <form-comp 
+      :username.sync="username" 
+      :password.sync="password" 
+      v-on:handle-submit="logInUser" 
+      :errors="errors"
+    />
   </div>
 </template>
