@@ -4,6 +4,23 @@ const bcrypt = require("bcryptjs");
 const SALT_ROUNDS = 8;
 
 module.exports = {
+	checkRecipients(to_idARR, content_id) {
+		return db("users_content")
+			.select("to_id")
+			.where("content_id", content_id)
+			.then(recipients => {
+				// console.log(recipients, to_idARR);
+				let test = to_idARR.filter(oneId => {
+					return !recipients.some(recipient => {
+						console.log(recipient.to_id, oneId);
+						return recipient.to_id === oneId;
+					});
+				});
+				console.log(test);
+				return test;
+			});
+	},
+
 	getUsers() {
 		return db("users").select("username");
 	},
@@ -83,30 +100,15 @@ module.exports = {
 					.then(ids => {
 						return contentId;
 					});
-			})
-			.catch(err => console.log(err));
+			});
 	},
 
-	addRecipients(toArr, content_id) {
-		return Promise.all(
-			toArr.map(to_id => {
-				return Promise.resolve(
-					db("users_content").insert({ to_id, content_id }),
-				);
-			}),
-		);
-	},
-
-	removeRecipients(toArr, content_id) {
-		return Promise.all(
-			toArr.map(to_id => {
-				return Promise.resolve(
-					db("users_content")
-						.where({ to_id, content_id })
-						.del(),
-				);
-			}),
-		);
+	addRecipients(recipients, contentId) {
+		return db("users_content")
+			.insert(recipients)
+			.then(ids => {
+				return contentId;
+			});
 	},
 
 	getUserFriends(id) {
