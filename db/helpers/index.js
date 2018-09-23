@@ -4,6 +4,39 @@ const bcrypt = require('bcryptjs');
 const SALT_ROUNDS = 8;
 
 module.exports = {
+  checkRecipients(to_idARR, content_id) {
+    return db('users_content')
+      .select('to_id')
+      .where('content_id', content_id)
+      .then(recipients => {
+        // console.log(recipients, to_idARR);
+        let test = to_idARR.filter(oneId => {
+          return !recipients.some(recipient => {
+            console.log(recipient.to_id, oneId);
+            return recipient.to_id === oneId;
+          });
+        });
+        console.log(test);
+        return test;
+      });
+  },
+
+  getContents(to_id) {
+    let content = db('content as c')
+      .join('users_content as uc', 'uc.content_id', 'c.id')
+      .join('users as u', 'u.id', 'c.from_id')
+      .select(
+        'c.title',
+        'c.description',
+        'c.rating',
+        'c.type',
+        'u.username as from',
+      )
+      .where('uc.to_id', to_id);
+
+    return content;
+  },
+
   getUsers() {
     return db('users').select('username');
   },
@@ -90,31 +123,29 @@ module.exports = {
           .then(ids => {
             return contentId;
           });
-      })
-      .catch(err => console.log(err));
+      });
   },
 
-  addRecipients(toArr, content_id) {
-    return Promise.all(
-      toArr.map(to_id => {
-        return Promise.resolve(
-          db('users_content').insert({ to_id, content_id }),
-        );
-      }),
-    );
+  addRecipients(recipients, contentId) {
+    return db('users_content')
+      .insert(recipients)
+      .then(ids => {
+        return contentId;
+      });
   },
 
-  removeRecipients(toArr, content_id) {
-    return Promise.all(
-      toArr.map(to_id => {
-        return Promise.resolve(
-          db('users_content')
-            .where({ to_id, content_id })
-            .del(),
-        );
-      }),
-    );
-  },
+  //SHOULD WE USE THIS?
+  // removeRecipients(toArr, content_id) {
+  // 	return Promise.all(
+  // 		toArr.map(to_id => {
+  // 			return Promise.resolve(
+  // 				db("users_content")
+  // 					.where({ to_id, content_id })
+  // 					.del(),
+  // 			);
+  // 		}),
+  // 	);
+  // },
 
   getUserFriends(id) {
     let user = db('users as u')

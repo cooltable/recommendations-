@@ -13,7 +13,7 @@ module.exports = {
 						message: "You are not authorized",
 					});
 				} else {
-					req.user = { username: decodedToken.username };
+					req.user = decodedToken.user;
 					next();
 				}
 			});
