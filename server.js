@@ -17,13 +17,15 @@ server.use("/auth", authRoutes);
 server.use("/users", protected, restrictedRoutes);
 server.use("/content", protected, contentRoutes);
 
-server.delete("/api/content/:id", (req, res) => {
-	const { to_id } = req.body;
-	helpers
-		.removeRecipients(to_id, req.params.id)
-		.then(response => res.json(response))
-		.catch(err => console.log(err));
-});
+//SHOULD WE USE THIS?
+
+// server.delete("/api/content/:id", (req, res) => {
+// 	const { to_id } = req.body;
+// 	helpers
+// 		.removeRecipients(to_id, req.params.id)
+// 		.then(response => res.json(response))
+// 		.catch(err => console.log(err));
+// });
 
 server.get("/api/content/:id", (req, res) => {
 	helpers

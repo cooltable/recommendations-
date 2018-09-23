@@ -21,6 +21,22 @@ module.exports = {
 			});
 	},
 
+	getContents(to_id) {
+		let content = db("content as c")
+			.join("users_content as uc", "uc.content_id", "c.id")
+			.join("users as u", "u.id", "c.from_id")
+			.select(
+				"c.title",
+				"c.description",
+				"c.rating",
+				"c.type",
+				"u.username as from",
+			)
+			.where("uc.to_id", to_id);
+
+		return content;
+	},
+
 	getUsers() {
 		return db("users").select("username");
 	},
@@ -110,6 +126,19 @@ module.exports = {
 				return contentId;
 			});
 	},
+
+	//SHOULD WE USE THIS?
+	// removeRecipients(toArr, content_id) {
+	// 	return Promise.all(
+	// 		toArr.map(to_id => {
+	// 			return Promise.resolve(
+	// 				db("users_content")
+	// 					.where({ to_id, content_id })
+	// 					.del(),
+	// 			);
+	// 		}),
+	// 	);
+	// },
 
 	getUserFriends(id) {
 		let user = db("users as u")

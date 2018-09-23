@@ -27,8 +27,8 @@ router.post("/register", function(req, res) {
 	helpers
 		.addUser({ username, first_name, last_name, password, email })
 		.then(user => {
-			console.log(user);
-			let token = generateToken({ user });
+			let token = generateToken({ user: { username, id: user.id } });
+
 			return res.json({
 				error: false,
 				message: user,

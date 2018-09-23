@@ -29,6 +29,7 @@ router.post("/", function(req, res) {
 	}
 });
 
+//Let's the sender update the recipients of his or her recc.
 router.put("/:id/recipients", (req, res) => {
 	const { to_id } = req.body;
 	helpers
@@ -59,6 +60,19 @@ router.put("/:id/recipients", (req, res) => {
 					contentId: contentId,
 				});
 			}
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ error: true, message: "Server Error" });
+		});
+});
+
+router.get("/", (req, res) => {
+	const { id } = req.user;
+	helpers
+		.getContents(id)
+		.then(contents => {
+			return res.json(contents);
 		})
 		.catch(err => {
 			console.log(err);
