@@ -60,8 +60,7 @@ router.post("/login", function(req, res) {
 				let token = generateToken({ user });
 
 				res.json({
-					error: false,
-					message: `Welcome ${username}`,
+					user,
 					token,
 				});
 			} else {
