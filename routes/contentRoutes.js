@@ -80,4 +80,15 @@ router.get("/", (req, res) => {
 		});
 });
 
+//Gets a specific reccomendation
+router.get("/:id", (req, res) => {
+	helpers
+		.getContent(req.params.id)
+		.then(response => res.json(response))
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ error: true, message: "Server Error" });
+		});
+});
+
 module.exports = router;
