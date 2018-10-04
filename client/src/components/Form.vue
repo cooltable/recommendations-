@@ -25,26 +25,32 @@ export default {
       </p>
       <div v-if="isRegister" class="input-wrapper">
         <input :value='firstname' @input="$emit('update:firstname', $event.target.value)" class="input" type="text" placeholder="First">
+        <label>First</label>
         <span class='border'></span>
       </div>
       <div v-if="isRegister" class="input-wrapper">
         <input :value='lastname' @input="$emit('update:lastname', $event.target.value)" class="input" type="text" placeholder="Last">
+        <label>Last</label>
         <span class='border'></span>
       </div>
       <div v-if="isRegister" class="input-wrapper">
         <input :value='email' @input="$emit('update:email', $event.target.value)" class="input" type="email" placeholder="Email">
+        <label>Email</label>
         <span class='border'></span>
       </div>
       <div class="input-wrapper">
         <input :value='username' @input="$emit('update:username', $event.target.value)" class="input" type="text" placeholder="Username">
+        <label>Username</label>
         <span class='border'></span>
       </div>
       <div class="input-wrapper">
         <input :value='password' @input="$emit('update:password', $event.target.value)" class="input" type="password" placeholder="Password">
+        <label>Password</label>
         <span class='border'></span>
       </div>
       <div v-if="isRegister" class="input-wrapper">
         <input :value='password2' @input="$emit('update:password2', $event.target.value)" class="input" type="password" placeholder="Repeat Password">
+        <label>Repeat Password</label>
         <span class='border'></span>
       </div>
       <button class="button"><i class="material-icons">send</i><span>Submit</span></button>
@@ -65,6 +71,10 @@ export default {
   color: inherit;
   border: none;
 
+  &::placeholder {
+    color: darken($color-white, 25%);
+  }
+
   &:not(:last-child) {
     margin-bottom: 30px;
   }
@@ -72,14 +82,31 @@ export default {
   &:focus {
     outline: none;
 
-    & + .border::after {
+    & ~ .border::after {
       transform: scale(1);
     }
+  }
+
+  &:not(:placeholder-shown) ~ label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-25px) scale(0.8);
   }
 }
 
 .input-wrapper {
   position: relative;
+
+  label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: $color-primary;
+    transform-origin: left;
+    transition: all 0.4s;
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 .border {
@@ -118,7 +145,8 @@ export default {
   justify-content: center;
   align-items: center;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $color-secondary;
     color: $color-white;
   }
