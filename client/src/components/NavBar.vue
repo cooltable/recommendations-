@@ -1,13 +1,13 @@
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: 'NavBar',
-  computed: mapState({
-    loggedIn: state => state.loggedIn,
-    user: state => state.user,
-  }),
-  methods: mapActions(['logOut']),
+	name: "NavBar",
+	computed: mapState({
+		loggedIn: state => state.loggedIn,
+		user: state => state.user,
+	}),
+	methods: mapActions(["logOut"]),
 };
 </script>
 
@@ -17,6 +17,7 @@ export default {
         <router-link to="/">
           <h2>Recommendations</h2>
         </router-link>
+      <router-link  to="/recs">Main</router-link>
       </div>
 			<div v-if="loggedIn">
 				
@@ -34,31 +35,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../variables';
+@import "../variables";
 .nav {
-  display: flex;
-  align-items: center;
-  padding: 3rem 0;
-  background-color: $color-primary;
-  color: $color-white;
+	display: flex;
+	align-items: center;
+	padding: 3rem 0;
+	background-color: $color-primary;
+	color: $color-white;
 
-  a {
-    text-decoration: none;
-    color: inherit;
-    font-size: inherit;
-    cursor: pointer;
+	a {
+		text-decoration: none;
+		color: inherit;
+		font-size: inherit;
+		cursor: pointer;
 
-    &:not(:last-child) {
-      margin-right: 2rem;
-    }
+		&:not(:last-child) {
+			margin-right: 2rem;
+		}
 
-    &:hover {
-      color: teal;
-    }
-  }
+		&:hover {
+			color: teal;
+		}
+	}
 
-  &-brand {
-    flex-grow: 1;
-  }
+	&-brand {
+		flex-grow: 1;
+	}
 }
 </style>
