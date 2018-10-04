@@ -15,19 +15,19 @@ export default {
   <div class="nav">
       <div class="nav-brand">
         <router-link to="/">
-          <h2>Recommendations</h2>
+          <h2 class="nav__rec">Recs</h2>
         </router-link>
-      <router-link  to="/recs">Main</router-link>
       </div>
-			<div v-if="loggedIn">
+			<div v-if="loggedIn" class="nav__links">
 				
-				<router-link to="/profile">Profile</router-link>
-      	<router-link to="/send">Send Recommnedation</router-link>
+				<router-link to="/profile" class="nav__link">Profile</router-link>
+      	<router-link to="/send" class="nav__link">Send Recommnedation</router-link>
 				<a @click.prevent="logOut">Log Out {{user.username}}</a>
 			</div>
-			<div v-else>
-      <router-link  to="/register">Sign Up</router-link>
-      <router-link  to="/login">Sign In</router-link>
+			<div v-else class="nav__links">
+      <router-link  to="/recs" class="nav__link">Main</router-link>
+      <router-link  to="/register" class="nav__link">Sign Up</router-link>
+      <router-link  to="/login" class="nav__link">Sign In</router-link>
 			</div>
       
   </div>
@@ -42,6 +42,27 @@ export default {
 	padding: 3rem 0;
 	background-color: $color-primary;
 	color: $color-white;
+
+	.nav__rec {
+		display: inline;
+		font-family: Charmonman;
+		font-weight: 700;
+		font-size: 40px;
+		margin-left: 40px;
+		&:hover {
+			color: $color-secondary;
+		}
+	}
+
+	.nav__links {
+		margin-right: 30px;
+	}
+
+	.nav__link {
+		&:hover {
+			color: $color-secondary;
+		}
+	}
 
 	a {
 		text-decoration: none;
