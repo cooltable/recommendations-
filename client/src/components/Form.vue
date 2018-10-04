@@ -85,6 +85,10 @@ export default {
     & ~ .border::after {
       transform: scale(1);
     }
+
+    & ~ .border::before {
+      opacity: 1;
+    }
   }
 
   &:not(:placeholder-shown) ~ label {
@@ -127,6 +131,21 @@ export default {
     transform: scaleX(0);
     transition: all 0.4s;
   }
+
+  &::before {
+    content: '→';
+    position: absolute;
+    top: -33px;
+    left: -25px;
+    /* width: 5px;
+    height: 5px; */
+    color: $color-secondary;
+    border-radius: 50%;
+    font-size: 20px;
+    /* background-color: $color-primary; */
+    opacity: 0;
+    /* transition: all 0.4s; */
+  }
 }
 
 .button {
@@ -149,6 +168,7 @@ export default {
   &:focus {
     background-color: $color-secondary;
     color: $color-white;
+    outline: none;
   }
 
   .material-icons {
