@@ -56,7 +56,7 @@ export default {
 @import '../variables';
 
 .input {
-  padding: 5px 10px;
+  padding: 10px;
   display: block;
   width: 100%;
   border-radius: 3px;
@@ -71,6 +71,34 @@ export default {
 
   &:focus {
     outline: none;
+
+    & + .border::after {
+      transform: scale(1);
+    }
+  }
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.border {
+  &,
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: darken($color-white, 20%);
+    border-radius: 30px;
+  }
+
+  &::after {
+    content: '';
+    background-color: $color-secondary;
+    transform: scaleX(0);
+    transition: all 0.4s;
   }
 }
 

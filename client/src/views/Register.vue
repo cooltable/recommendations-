@@ -56,7 +56,7 @@ export default {
 
 <template>
   <div class="register">
-    <h1>SignUp</h1>
+    <h1>Sign Up</h1>
     <form-comp
       :username.sync="username"
       :password.sync="password"
@@ -73,6 +73,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@import '../variables';
 .register {
   text-align: center;
   max-width: 550px;
@@ -80,6 +81,10 @@ export default {
 
   h1 {
     margin: 30px 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: $color-primary;
+    font-weight: normal;
   }
 }
 </style>
