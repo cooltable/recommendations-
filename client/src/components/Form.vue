@@ -20,7 +20,7 @@ export default {
       <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
         <ul>
-          <li v-for="error in errors">{{ error }}</li>
+          <li :key="error" v-for="error in errors">{{ error }}</li>
         </ul>
       </p>
       <div v-if="isRegister" class="input-wrapper">
@@ -44,37 +44,60 @@ export default {
         <span class='border'></span>
       </div>
       <div v-if="isRegister" class="input-wrapper">
-        <input :value='password2' @input="$emit('update:password2', $event.target.value)" class="input" type="password" placeholder="Password">
+        <input :value='password2' @input="$emit('update:password2', $event.target.value)" class="input" type="password" placeholder="Repeat Password">
         <span class='border'></span>
       </div>
-      <button class="button">Submit</button>
+      <button class="button"><i class="material-icons">send</i><span>Submit</span></button>
     </form>
   </div>
 </template>
 
 <style scoped lang="scss">
 @import '../variables';
-.wrapper {
+
+.input {
+  padding: 5px 10px;
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  border: none;
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.button {
+  border-radius: 3px;
+  border: 1px solid $color-secondary;
+  padding: 5px 10px;
+  margin: 5px 0;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $color-secondary;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  .input {
-    padding: 5px 10px;
-    margin: 5px 0;
+  &:hover {
+    background-color: $color-secondary;
+    color: $color-white;
   }
 
-  .button {
-    border-radius: 2px;
-
-    border: 1px solid $color-secondary;
-    padding: 5px 10px;
-    margin: 5px 0;
-    width: 100%;
-
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: $color-secondary;
+  .material-icons {
+    margin-right: 5px;
+    font-size: 18px;
   }
 }
 </style>
