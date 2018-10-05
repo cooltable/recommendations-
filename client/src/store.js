@@ -26,7 +26,8 @@ export default new Vuex.Store({
         .then(response => {
           console.log(response);
           commit('setLoggedIn', true);
-          commit('setUser', user);
+          commit('setUser', response.data.user);
+
           localStorage.setItem('token', response.data.token);
           router.push('/profile');
         })
@@ -37,7 +38,8 @@ export default new Vuex.Store({
         .post('http://localhost:8000/auth/register', user)
         .then(response => {
           commit('setLoggedIn', true);
-          commit('setUser', user);
+          commit('setUser', response.data.user);
+
           localStorage.setItem('token', response.data.token);
           router.push('/profile');
         })
