@@ -30,7 +30,8 @@ router.post('/register', function(req, res) {
       let token = generateToken({ user: { username, id: user.id } });
 
       return res.json({
-        user,
+        error: false,
+        message: user,
         token,
       });
     })
