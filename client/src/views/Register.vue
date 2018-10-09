@@ -56,18 +56,35 @@ export default {
 
 <template>
   <div class="register">
-    <h1>SignUp</h1>
-    <form-comp 
-      :username.sync="username" 
-      :password.sync="password" 
+    <h1>Sign Up</h1>
+    <form-comp
+      :username.sync="username"
+      :password.sync="password"
       :password2.sync="password2"
       :firstname.sync="firstname"
       :lastname.sync="lastname"
       :email.sync="email"
-      v-on:handle-submit="register" 
+      v-on:handle-submit="register"
       :errors="errors"
       :is-register="true"
     />
-    
+
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import '../variables';
+.register {
+  text-align: center;
+  max-width: 550px;
+  margin: 0 auto;
+
+  h1 {
+    margin: 30px 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: $color-primary;
+    font-weight: normal;
+  }
+}
+</style>
