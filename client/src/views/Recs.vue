@@ -1,6 +1,15 @@
 <script>
+import RecRow from "../components/RecRow.vue";
+import { mapState } from "vuex";
+import lodash from "lodash";
+
 export default {
 	name: "recs",
+	components: { RecRow },
+	computed: mapState({
+		recs: state => lodash.groupBy(state.recs, "type"),
+		categories: state => Object.keys(lodash.groupBy(state.recs, "type")),
+	}),
 };
 </script>
 
@@ -14,79 +23,7 @@ export default {
         </div>
 
         <div class="Main">
-            <div class="Movies List">
-                <h2 class="List__heading">Movies:</h2>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-                    <h3 class="Rec__Title">Brazil</h3>
-                    <p class="Rec__description">The best movie ever</p>
-                </div>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">Rushmore</h3>
-                    <p class="Rec__description">The second best movie ever</p>
-                </div>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">Spirited Away</h3>
-                    <p class="Rec__description">The third best movie ever</p>
-                </div>
-            </div>
-
-            <div class="Books List">
-                <h2 class="List__heading">Books:</h2>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">The Idiot</h3>
-                    <p class="Rec__description">The best book ever</p>
-                </div>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">Pale Fire</h3>
-                    <p class="Rec__description">The second best book ever</p>
-                </div>
-            </div>
-
-            <div class="Music List">
-                <h2 class="List__heading">Music:</h2>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">Blood on the Tracks</h3>
-                    <p class="Rec__description">The best album ever</p>
-                </div>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">Pink Moon</h3>
-                    <p class="Rec__description">The second best album ever</p>
-                </div>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">The Hounds of Love</h3>
-                    <p class="Rec__description">The third best album ever</p>
-                </div>
-                <div class="Rec">
-                    <img class="Rec__image" src="../assets/logo.png" alt="">
-                    <hr>
-
-                    <h3 class="Rec__Title">Hunky Dory</h3>
-                    <p class="Rec__description">The fourth best album ever</p>
-                </div>
-            </div>
+            <RecRow v-for="category in categories" v-bind:key="category" v-bind:type="category" v-bind:items="recs[category]"></RecRow>
             <button class="Main__recButton">
                 <p>R</p>
             </button>
@@ -164,12 +101,14 @@ export default {
 
 .List__heading {
 	margin: 10px 40px 10px 10px;
+	width: 100px;
 }
 
 .Rec {
 	border: 1px solid gray;
 	border-radius: 4px;
 	padding: 15px;
+
 	.Rec__Title {
 		margin-top: 10px;
 	}

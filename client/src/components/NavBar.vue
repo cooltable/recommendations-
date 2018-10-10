@@ -22,10 +22,10 @@ export default {
 				
 				<router-link to="/profile" class="nav__link">Profile</router-link>
       	<router-link to="/send" class="nav__link">Send Recommnedation</router-link>
+      	<router-link  to="/recs" class="nav__link">Your Recs</router-link>
 				<a @click.prevent="logOut">Log Out {{user.username}}</a>
 			</div>
 			<div v-else class="nav__links">
-      <router-link  to="/recs" class="nav__link">Main</router-link>
       <router-link  to="/register" class="nav__link">Sign Up</router-link>
       <router-link  to="/login" class="nav__link">Sign In</router-link>
 			</div>
