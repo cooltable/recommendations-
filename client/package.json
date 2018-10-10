@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.11",
     "material-icons": "^0.2.3",
     "typography": "^0.16.17",
     "vue": "^2.5.17",

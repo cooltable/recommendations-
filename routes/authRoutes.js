@@ -57,7 +57,7 @@ router.post("/login", function(req, res) {
 		.login(username)
 		.then(user => {
 			if (user && bcrypt.compareSync(password, user.password)) {
-				let token = generateToken({ user });
+				let token = generateToken({ user: { username, id: user.id } });
 
 				res.json({
 					user,
