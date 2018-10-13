@@ -1,29 +1,29 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const helpers = require("../db/helpers/index");
+const helpers = require('../db/helpers/index');
 
-router.get("/friends", (req, res) => {
-	console.log(req.query.id);
-	helpers
-		.getUserFriends(req.query.id)
-		.then(response => res.json(response))
-		.catch(err => console.log(err));
+router.get('/:id', (req, res) => {
+  console.log(req.params.id);
+  helpers
+    .getUserFriends(req.params.id)
+    .then(response => res.json(response))
+    .catch(err => console.log(err));
 });
 
-router.post("/friends", (req, res) => {
-	let { friend_id } = req.body;
-	helpers
-		.addFriend(req.query.id, friend_id)
-		.then(response => res.json(response))
-		.catch(err => console.log(err));
+router.post('/', (req, res) => {
+  let { friend_id } = req.body;
+  helpers
+    .addFriend(req.params.id, friend_id)
+    .then(response => res.json(response))
+    .catch(err => console.log(err));
 });
 
-router.delete("/friends", (req, res) => {
-	let { friend_id } = req.body;
-	helpers
-		.removeFriend(req.query.id, friend_id)
-		.then(response => res.json(response))
-		.catch(err => console.log(err));
+router.delete('/', (req, res) => {
+  let { friend_id } = req.body;
+  helpers
+    .removeFriend(req.params.id, friend_id)
+    .then(response => res.json(response))
+    .catch(err => console.log(err));
 });
 
 module.exports = router;

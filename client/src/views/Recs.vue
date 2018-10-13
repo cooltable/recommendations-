@@ -11,6 +11,7 @@ export default {
   computed: mapState({
     recs: state => lodash.groupBy(state.recs, 'type'),
     categories: state => Object.keys(lodash.groupBy(state.recs, 'type')),
+    friends: state => state.friends,
   }),
 };
 </script>
@@ -19,9 +20,12 @@ export default {
     <div class="Wrapper">
         <div class="Sidebar">
             <h3 class="Sidebar__header">Friends:</h3>
-            <a class="Sidebar__friend" href="">Ash</a>
+						<div v-for="friend in friends" v-bind:key="friend.id">
+							<a class="Sidebar__friend" href="">{{friend.username}}</a>
+						</div>
+            <!-- <a class="Sidebar__friend" href="">Ash</a>
             <a class="Sidebar__friend" href="">Lauren</a>
-            <a class="Sidebar__friend" href="">Liz</a>
+            <a class="Sidebar__friend" href="">Liz</a> -->
         </div>
 
         <div class="Main">

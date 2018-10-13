@@ -2,13 +2,15 @@
 import Modal from '../components/Modal';
 export default {
   name: 'newContent',
-  props: ['showModal'],
+
   components: {
     Modal,
   },
   data: function() {
-    showModal: false;
-    title: '';
+    return {
+      showModal: false,
+      title: '',
+    };
   },
 };
 </script>
@@ -20,7 +22,7 @@ export default {
     </button>
     
     <modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header">Show Message</h3>
+      <h3 slot="header">Recommend</h3>
     </modal>
   </div>
 </template>

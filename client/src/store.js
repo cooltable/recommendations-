@@ -10,6 +10,7 @@ export default new Vuex.Store({
     loggedIn: false,
     user: null,
     recs: [],
+    friends: [],
   },
   mutations: {
     setLoggedIn(state, val) {
@@ -22,6 +23,10 @@ export default new Vuex.Store({
 
     setRecs(state, recs) {
       state.recs = recs;
+    },
+
+    setFriends(state, friends) {
+      state.friends = friends;
     },
   },
   actions: {
@@ -40,6 +45,7 @@ export default new Vuex.Store({
             token: response.data.token,
             user: response.data.user,
           });
+
           router.push('/profile');
         })
         .catch(err => console.log(err));
@@ -67,12 +73,29 @@ export default new Vuex.Store({
         commit('setRecs', response.data);
         commit('setUser', user);
         commit('setLoggedIn', true);
+        this.dispatch('getFriends', {
+          token: token,
+          user: user,
+        });
       });
     },
     logOut({ state, commit }) {
       commit('setLoggedIn', false);
       commit('setUser', null);
       router.push('/');
+    },
+
+    getFriends({ state, commit }, { token, user }) {
+      console.log(token, user);
+      axios({
+        method: 'GET',
+        url: `http://localhost:7000/friends/${user.id}`,
+        headers: {
+          Authorization: token,
+        },
+      }).then(response => {
+        commit('setFriends', response.data.friends);
+      });
     },
   },
 });
