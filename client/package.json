@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.11",
     "material-icons": "^0.2.3",
     "typography": "^0.16.17",
     "vue": "^2.5.17",
@@ -22,6 +23,7 @@
     "@vue/cli-service": "^3.0.1",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {

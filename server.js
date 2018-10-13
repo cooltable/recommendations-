@@ -29,7 +29,7 @@ server.use("/friends", protected, friendRoutes);
 // 		.catch(err => console.log(err));
 // });
 
-const port = 8000;
+const port = 7000;
 server.listen(port, function() {
 	console.log(`\n === Web API Listening on http://localhost:${port}===`);
 });
