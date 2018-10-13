@@ -165,6 +165,10 @@ module.exports = {
     return content;
   },
 
+  getContentTypes() {
+    return db('content_types');
+  },
+
   removeFriend(id, friendId) {
     return db('friends')
       .where('alpha_id', id)

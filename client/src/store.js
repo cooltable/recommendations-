@@ -11,6 +11,7 @@ export default new Vuex.Store({
     user: null,
     recs: [],
     friends: [],
+    types: [],
   },
   mutations: {
     setLoggedIn(state, val) {
@@ -27,6 +28,10 @@ export default new Vuex.Store({
 
     setFriends(state, friends) {
       state.friends = friends;
+    },
+
+    setTypes(state, types) {
+      state.types = types;
     },
   },
   actions: {
@@ -69,15 +74,27 @@ export default new Vuex.Store({
         headers: {
           Authorization: token,
         },
-      }).then(response => {
-        commit('setRecs', response.data);
-        commit('setUser', user);
-        commit('setLoggedIn', true);
-        this.dispatch('getFriends', {
-          token: token,
-          user: user,
+      })
+        .then(response => {
+          commit('setRecs', response.data);
+          commit('setUser', user);
+          commit('setLoggedIn', true);
+          this.dispatch('getFriends', {
+            token: token,
+            user: user,
+          });
+        })
+        .then(() => {
+          axios({
+            method: 'GET',
+            url: 'http://localhost:7000/content/types',
+            headers: {
+              Authorization: token,
+            },
+          }).then(response => {
+            commit('setTypes', response.data);
+          });
         });
-      });
     },
     logOut({ state, commit }) {
       commit('setLoggedIn', false);

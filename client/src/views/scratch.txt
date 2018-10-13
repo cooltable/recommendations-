@@ -71,3 +71,10 @@
                     <p class="Rec__description">The fourth best album ever</p>
                 </div>
             </div>
+
+            <select v-model="type">
+        <option disabled value="">Please select one</option>
+        <option>movie</option>
+        <option>book</option>
+        <option>album</option>
+      </select> 

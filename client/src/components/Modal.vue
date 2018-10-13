@@ -3,6 +3,7 @@ export default {
   name: 'Modal',
 };
 </script>
+http://www.omdbapi.com/?i=tt3896198&apikey=30939ebf
 
 <template>
   <transition name="modal">
@@ -24,9 +25,9 @@ export default {
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
+             
               <button class="modal-default-button" @click="$emit('close')">
-                OK
+                Close
               </button>
             </slot>
           </div>
@@ -55,7 +56,8 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
+  width: 50%;
+  max-width: 400px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
