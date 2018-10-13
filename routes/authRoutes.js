@@ -53,19 +53,11 @@ router.post('/login', function(req, res) {
       message: 'Please provide a Username and Password',
     });
 
-<<<<<<< HEAD
   helpers
     .login(username)
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        let token = generateToken({ user });
-=======
-	helpers
-		.login(username)
-		.then(user => {
-			if (user && bcrypt.compareSync(password, user.password)) {
-				let token = generateToken({ user: { username, id: user.id } });
->>>>>>> f71b017d9dd7ddfd63071d6f7fd5a4128f4a1d69
+        let token = generateToken({ user: { username, id: user.id } });
 
         res.json({
           user,
