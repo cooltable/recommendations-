@@ -29,10 +29,19 @@ export default new Vuex.Store({
 			axios
 				.post("http://localhost:7000/auth/login", user)
 				.then(response => {
+					console.log(response);
 					commit("setLoggedIn", true);
-					commit("setUser", user);
+					commit("setUser", response.data.user);
 					localStorage.setItem("token", response.data.token);
-					this.dispatch("getRecs", response.data.token);
+					//hacky way change dis shit later kthnx
+					localStorage.setItem(
+						"user",
+						JSON.stringify(response.data.user),
+					);
+					this.dispatch("getRecs", {
+						token: response.data.token,
+						user: response.data.user,
+					});
 					router.push("/profile");
 				})
 				.catch(err => console.log(err));
@@ -48,8 +57,8 @@ export default new Vuex.Store({
 				})
 				.catch(err => console.log(err));
 		},
-		getRecs({ state, commit }, token) {
-			console.log(token);
+		getRecs({ state, commit }, { token, user }) {
+			console.log(token, user);
 			axios({
 				method: "GET",
 				url: "http://localhost:7000/content/",
@@ -58,6 +67,8 @@ export default new Vuex.Store({
 				},
 			}).then(response => {
 				commit("setRecs", response.data);
+				commit("setUser", user);
+				commit("setLoggedIn", true);
 			});
 		},
 		logOut({ state, commit }) {

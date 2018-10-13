@@ -5,7 +5,10 @@ import lodash from "lodash";
 
 export default {
 	name: "recs",
-	components: { RecRow },
+	components: { RecRow, Modal },
+	data: function() {
+		showModal: false;
+	},
 	computed: mapState({
 		recs: state => lodash.groupBy(state.recs, "type"),
 		categories: state => Object.keys(lodash.groupBy(state.recs, "type")),
@@ -24,9 +27,10 @@ export default {
 
         <div class="Main">
             <RecRow v-for="category in categories" v-bind:key="category" v-bind:type="category" v-bind:items="recs[category]"></RecRow>
-            <button class="Main__recButton">
+            <button class="Main__recButton" @click="showModal = true">
                 <p>R</p>
             </button>
+						<Modal />
         </div>
     </div>
 </template>
@@ -42,6 +46,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	width: 10%;
+	height: 100vh;
 	background-color: $color-primary;
 }
 

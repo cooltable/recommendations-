@@ -9,18 +9,38 @@ export default {
 
 <template>
     <div class='rowWrapper'>
-        <h3>{{type}}</h3>
+		<div class="title">
+        <h3>{{type}}s</h3>
+		</div>
+		<div class="recs">
         <Rec class="rec" v-for="item in items" v-bind:key="item.title" v-bind:rec="item"></Rec>
+		</div>
     </div>
 </template>
 
 <style scoped lang='scss'>
 .rowWrapper {
-	display: flex;
+	margin: 40px;
+
+	.title {
+		padding-bottom: 20px;
+		h3 {
+			text-align: left;
+			text-transform: uppercase;
+		}
+	}
 }
 
-.rec {
-	margin-right: 20px;
+.recs {
+	display: flex;
+
+	.rec {
+		margin-right: 50px;
+		max-width: 220px;
+		border: 1px solid lightgray;
+		border-radius: 5px;
+		padding: 10px;
+	}
 }
 </style>
 

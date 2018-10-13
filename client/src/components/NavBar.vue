@@ -3,6 +3,14 @@ import { mapState, mapActions } from "vuex";
 
 export default {
 	name: "NavBar",
+	mounted: function() {
+		let user = JSON.parse(localStorage.getItem("user"));
+		let token = localStorage.getItem("token");
+		console.log(user);
+		if (user) {
+			this.$store.dispatch("getRecs", { token, user });
+		}
+	},
 	computed: mapState({
 		loggedIn: state => state.loggedIn,
 		user: state => state.user,
