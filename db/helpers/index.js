@@ -98,26 +98,34 @@ module.exports = {
 
   //First 5 keys in argument are inserted into the content table, 6th key is
   //an array of user ids, all of which are added to the users_content table.
-  addContent(content) {
-    let { title, description, type, rating, from_id, to_idARR } = content;
+  // addContent(content) {
+  //   let {
+  //     title,
+  //     description,
+  //     type,
+  //     rating,
+  //     from_id,
+  //     to_idARR,
+  //     image,
+  //   } = content;
+  //   console.log(content);
+  //   return db('content')
+  //     .insert({ title, description, type, rating, from_id, image })
+  //     .then(id => {
+  //       let contentId = id[0];
 
-    return db('content')
-      .insert({ title, description, type, rating, from_id })
-      .then(id => {
-        let contentId = id[0];
+  //       let recipients = to_idARR.map(to => ({
+  //         to_id: to,
+  //         content_id: contentId,
+  //       }));
 
-        let recipients = to_idARR.map(to => ({
-          to_id: to,
-          content_id: contentId,
-        }));
-
-        return db('users_content')
-          .insert(recipients)
-          .then(ids => {
-            return contentId;
-          });
-      });
-  },
+  //       return db('users_content')
+  //         .insert(recipients)
+  //         .then(ids => {
+  //           return contentId;
+  //         });
+  //     });
+  // },
 
   addRecipients(recipients, contentId) {
     return db('users_content')
@@ -169,7 +177,7 @@ module.exports = {
   },
 
   getContentTypes() {
-    return db('content_types');
+    return db('content_types').select('type');
   },
 
   removeFriend(id, friendId) {
@@ -185,7 +193,7 @@ module.exports = {
       });
   },
   getUsers() {
-    return db('users').select('username');
+    return db('users');
   },
 
   addUser(user) {
@@ -254,10 +262,18 @@ module.exports = {
   //First 5 keys in argument are inserted into the content table, 6th key is
   //an array of user ids, all of which are added to the users_content table.
   addContent(content) {
-    let { title, description, type, rating, from_id, to_idARR } = content;
+    let {
+      title,
+      description,
+      type,
+      rating,
+      from_id,
+      to_idARR,
+      image,
+    } = content;
 
     return db('content')
-      .insert({ title, description, type, rating, from_id })
+      .insert({ title, description, type, rating, from_id, image })
       .then(id => {
         let contentId = id[0];
 

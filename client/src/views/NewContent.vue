@@ -13,6 +13,7 @@ export default {
   },
   computed: mapState({
     friends: state => state.friends,
+    types: state => state.types,
   }),
   data: function() {
     return {
@@ -23,7 +24,7 @@ export default {
       tofriends: [],
       poster: '',
       rating: 0,
-      types: ['movie', 'book', 'album'],
+
       description: '',
     };
   },
@@ -37,14 +38,14 @@ export default {
       this.$store.dispatch('addRec', {
         title: this.title,
         description: this.description,
-        type: this.type,
+        type: this.type.type,
         rating: this.rating,
         to_idARR: to_idARR,
         image: this.poster,
       });
     },
     handleSearch: function() {
-      if (this.type === 'movie') {
+      if (this.type.type === 'movie') {
         let movie = this.title.replace(/\s/g, '+');
         axios
           .get(`http://www.omdbapi.com/?t=${movie}&apikey=30939ebf`)
@@ -76,7 +77,7 @@ export default {
           <div v-if="isSearch">
             <div class="row">
               <p>Recommend a </p>
-              <v-select class="type" v-model="type" :options="types"></v-select>
+              <v-select class="type" v-model="type" :options="types" label="type"></v-select>
             </div>
             <div class="row">
               <p>to</p>

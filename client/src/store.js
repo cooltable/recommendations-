@@ -116,11 +116,17 @@ export default new Vuex.Store({
     },
 
     addRec({ state, commit }, rec) {
-      rec.id = state.user.id;
-      console.log(rec);
+      rec.from_id = state.user.id;
+      let token = localStorage.getItem('token');
+      console.log(rec, token);
       axios({
-        method: '',
-      });
+        method: 'POST',
+        url: 'http://localhost:7000/content/',
+        data: rec,
+        headers: {
+          Authorization: token,
+        },
+      }).then(response => console.log(response));
     },
   },
 });

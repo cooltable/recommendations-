@@ -5,8 +5,25 @@ const helpers = require('../db/helpers/index');
 //Adds a Recommendation and attaches all neccessary references to the
 //users_content table.
 router.post('/', function(req, res) {
-  const { title, description, type, rating, from_id, to_idARR } = req.body;
-  if (!title || !description || !type || !rating || !from_id || !to_idARR) {
+  console.log(req.body);
+  const {
+    title,
+    description,
+    type,
+    rating,
+    from_id,
+    to_idARR,
+    image,
+  } = req.body;
+  if (
+    !title ||
+    !description ||
+    !type ||
+    !rating ||
+    !from_id ||
+    !to_idARR ||
+    !image
+  ) {
     return res.json({
       error: true,
       message: 'Please provide information for all fields',
