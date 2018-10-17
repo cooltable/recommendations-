@@ -67,6 +67,7 @@ module.exports = {
   },
 
   getContent(id) {
+    console.log('wtf is giong on ', id);
     let content = db('content as c')
       .join('users_content as uc', 'uc.content_id', 'c.id')
       .join('users as u', 'u.id', 'c.from_id')
@@ -89,6 +90,7 @@ module.exports = {
 
     return Promise.all(promises).then(response => {
       let [content, toUsers] = response;
+      console.log(content);
       content.to = toUsers;
       return content;
     });
@@ -158,6 +160,7 @@ module.exports = {
         'c.description',
         'c.rating',
         'c.type',
+        'c.image',
         'u.username as from',
       )
       .where('uc.to_id', to_id);
@@ -219,33 +222,34 @@ module.exports = {
       });
   },
 
-  getContent(id) {
-    let content = db('content as c')
-      .join('users_content as uc', 'uc.content_id', 'c.id')
-      .join('users as u', 'u.id', 'c.from_id')
-      .select(
-        'c.title',
-        'c.description',
-        'c.rating',
-        'c.type',
-        'u.username as from',
-      )
-      .where('c.id', id)
-      .first();
+  // getContent(id) {
+  //   let content = db('content as c')
+  //     .join('users_content as uc', 'uc.content_id', 'c.id')
+  //     .join('users as u', 'u.id', 'c.from_id')
+  //     .select(
+  //       'c.title',
+  //       'c.description',
+  //       'c.rating',
+  //       'c.type',
+  //       'u.username as from',
+  //     )
+  //     .where('c.id', id)
+  //     .first();
 
-    let toUsers = db('users_content as uc')
-      .join('users as u', 'u.id', 'uc.to_id')
-      .select('u.username', 'u.id')
-      .where('uc.content_id', id);
+  //   let toUsers = db('users_content as uc')
+  //     .join('users as u', 'u.id', 'uc.to_id')
+  //     .select('u.username', 'u.id')
+  //     .where('uc.content_id', id);
 
-    const promises = [content, toUsers];
+  //   const promises = [content, toUsers];
 
-    return Promise.all(promises).then(response => {
-      let [content, toUsers] = response;
-      content.to = toUsers;
-      return content;
-    });
-  },
+  //   return Promise.all(promises).then(response => {
+  //     let [content, toUsers] = response;
+  //     console.log(content);
+  //     content.to = toUsers;
+  //     return content;
+  //   });
+  // },
 
   //First 5 keys in argument are inserted into the content table, 6th key is
   //an array of user ids, all of which are added to the users_content table.

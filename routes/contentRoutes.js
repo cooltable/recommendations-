@@ -67,8 +67,8 @@ router.put('/:id/recipients', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  console.log(req.user);
   const { id } = req.user;
+  console.log(id);
   helpers
     .getContents(id)
     .then(contents => {
@@ -81,7 +81,7 @@ router.get('/', (req, res) => {
 });
 
 //Gets a specific reccomendation
-router.get('/:id', (req, res) => {
+router.get('/users/:id', (req, res) => {
   helpers
     .getContent(req.params.id)
     .then(response => res.json(response))
@@ -92,9 +92,10 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/types', (req, res) => {
+  console.log('hello');
   helpers
     .getContentTypes()
-    .then(response => console.log(response))
+    .then(response => res.json(response))
     .catch(err => {
       console.log(err);
       res.status(500).json({ error: true, message: 'Server Error' });

@@ -114,5 +114,13 @@ export default new Vuex.Store({
         commit('setFriends', response.data.friends);
       });
     },
+
+    addRec({ state, commit }, rec) {
+      rec.id = state.user.id;
+      console.log(rec);
+      axios({
+        method: '',
+      });
+    },
   },
 });

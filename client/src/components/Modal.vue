@@ -3,7 +3,7 @@ export default {
   name: 'Modal',
 };
 </script>
-http://www.omdbapi.com/?i=tt3896198&apikey=30939ebf
+
 
 <template>
   <transition name="modal">
@@ -56,6 +56,7 @@ http://www.omdbapi.com/?i=tt3896198&apikey=30939ebf
 }
 
 .modal-container {
+  min-height: 300px;
   width: 50%;
   max-width: 400px;
   margin: 0px auto;
@@ -78,5 +79,19 @@ http://www.omdbapi.com/?i=tt3896198&apikey=30939ebf
 
 .modal-default-button {
   float: right;
+}
+
+.modal-default-button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 1px solid rgba(60, 60, 60, 0.26);
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: rgba(60, 60, 60, 0.8);
+  margin-bottom: 5px;
+  text-align: center;
 }
 </style>
