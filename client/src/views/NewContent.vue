@@ -11,7 +11,7 @@ export default {
     Modal,
     StarRating,
     ContentSearch,
-    RecButton
+    RecButton,
   },
 
   data: function() {
@@ -78,7 +78,10 @@ export default {
 
       </div>
     </modal> -->
+    <div class="rec-search"> 
+    <input v-model="title" placeholder="search" class="search"/>
     <rec-button :add="true"/>
+    </div>
   </div>
 </template>
 
@@ -92,42 +95,25 @@ form {
   align-items: center;
 }
 
-.Main__recButton {
-  display: flex;
-  justify-content: center;
-  align-items: cetner;
-  border: none;
-  outline: none;
-  border-radius: 50%;
-  background-color: $color-secondary;
-  height: 100px;
-  width: 100px;
+.rec-search {
   position: fixed;
   bottom: 40px;
   right: 40px;
-  color: $color-white;
-  text-align: center;
-  font-family: Charmonman;
-  font-size: 30px;
-  font-weight: 700;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.Main__recButton p {
-  margin-right: 8px;
-}
-
-.input {
+.search {
   font-size: 18px;
-  padding: 4px;
+  padding: 8px;
+  outline: none;
   border: 1px solid rgba(60, 60, 60, 0.26);
   border-radius: 4px;
-  margin-top: 15px;
-  width: 75%;
-}
+  margin-right: -7px;
+  caret-color: #cc4040;
 
-.submit {
-  height: 100%;
-  padding: 10px;
+  &::placeholder {
+    color: #b9b9b9;
+  }
 }
 </style>

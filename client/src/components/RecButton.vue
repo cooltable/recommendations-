@@ -12,16 +12,16 @@ export default {
 };
 </script>
 
-
-
 <template>
-<button  v-bind:class="[main, add ? addRec : content ]"  @click="showModal = true">
-      <p>R</p>
-    </button>
+  <button v-bind:class="[main, add ? addRec : content ]" @click="showModal = true">
+    <p>R</p>
+  </button>
 </template>
 
 
-<style scoped>
+<style scoped lang="scss">
+@import '../variables';
+
 .Main__recButton {
   display: flex;
   justify-content: center;
@@ -29,18 +29,18 @@ export default {
   border: none;
   outline: none;
   border-radius: 50%;
-
   height: 100px;
   width: 100px;
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  color: white;
+  color: $color-white;
   text-align: center;
   font-family: Charmonman;
   font-size: 30px;
   font-weight: 700;
   cursor: pointer;
+
+  p {
+    margin-right: 8px;
+  }
 }
 
 .add-rec {
@@ -50,10 +50,9 @@ export default {
 }
 
 .content {
-  background-color: #ffab00;
-}
-
-.Main__recButton p {
-  margin-right: 8px;
+  background-color: $color-secondary;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
 }
 </style>
