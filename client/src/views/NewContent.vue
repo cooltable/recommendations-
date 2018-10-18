@@ -1,5 +1,6 @@
 <script>
 import Modal from '../components/Modal';
+import RecButton from '../components/RecButton.vue';
 import ContentSearch from './ContentSearch';
 import { StarRating } from 'vue-rate-it';
 
@@ -10,6 +11,7 @@ export default {
     Modal,
     StarRating,
     ContentSearch,
+    RecButton
   },
 
   data: function() {
@@ -50,7 +52,9 @@ export default {
 
 <template>
   <div class="new-content">
-    <button class="Main__recButton" @click="showModal = true">
+    <!-- on click: all content slide to left, button change from yellow to red, text field appear on button
+    sidebar get replaced by filter tool- default to movie (default to last thing user searched for)  -->
+    <!-- <button class="Main__recButton" @click="showModal = true">
       <p>R</p>
     </button>
 
@@ -59,7 +63,7 @@ export default {
       <div slot="body">
 
         
-          <content-search v-if="isSearch" :type.sync="this.type.type" :title.sync="title" :toFriends.sync="toFriends"/>
+          <content-search v-if="isSearch" :title.sync="title" :toFriends.sync="toFriends"/>
             
           <div v-else>
           <form v-on:submit.prevent="handleSubmit">
@@ -73,7 +77,8 @@ export default {
         
 
       </div>
-    </modal>
+    </modal> -->
+    <rec-button :add="true"/>
   </div>
 </template>
 

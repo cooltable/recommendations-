@@ -1,12 +1,13 @@
 <script>
 import RecRow from '../components/RecRow.vue';
+import RecButton from '../components/RecButton.vue';
 import NewContent from './NewContent.vue';
 import { mapState } from 'vuex';
 import lodash from 'lodash';
 
 export default {
   name: 'recs',
-  components: { RecRow, NewContent },
+  components: { RecRow, NewContent, RecButton },
 
   computed: mapState({
     recs: state => lodash.groupBy(state.recs, 'type'),
@@ -30,7 +31,10 @@ export default {
 
         <div class="Main">
             <RecRow v-for="category in categories" v-bind:key="category" v-bind:type="category" v-bind:items="recs[category]"></RecRow>
-						<new-content/>
+						<!-- <new-content/> -->
+            <router-link to="/send"><rec-button /></router-link>
+            	
+            
             <!-- <button class="Main__recButton" @click="showModal = true">
                 <p>R</p>
             </button> -->

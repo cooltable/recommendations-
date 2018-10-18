@@ -4,11 +4,16 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'contentSearch',
-  props: ['type', 'title', 'toFriends'],
+  props: ['title', 'toFriends'],
   computed: mapState({
     friends: state => state.friends,
     types: state => state.types,
   }),
+  data: function() {
+    return {
+      type: '',
+    };
+  },
   methods: {
     handleSearch: function() {
       if (this.type === 'movie' || this.type === 'series') {
@@ -34,7 +39,7 @@ export default {
   <form v-on:submit.prevent="handleSearch">
   <div class="row">
     <p>Recommend a </p>
-    <v-select class="type" :value="type" :options="types" label="type"></v-select>
+    <v-select class="type" :value="type" :options="types" label="type" ></v-select>
   </div>
   <div class="row">
     <p>to</p>
